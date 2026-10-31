@@ -6822,12 +6822,41 @@
             };
         }
         try {
-            const controller = new AbortController(); const timeoutId = setTimeout(() => controller.abort(), 60000);
-            const response = await fetch(BACKEND_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt, schema }), signal: controller.signal });
-            clearTimeout(timeoutId);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const data = await response.json(); updateBadge('api', 'ok'); return data;
-        } catch (err) { updateBadge('api', 'error'); throw new Error("Falha no servidor I.A. " + err.message); }
+            const once = async (ms) => {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), ms);
+                try {
+                    const response = await fetch(BACKEND_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt, schema }), signal: controller.signal });
+                    if (!response.ok) {
+                        let detail = '';
+                        try {
+                            const j = await response.json();
+                            detail = j.error || (j.details && j.details.error && j.details.error.message) || '';
+                        } catch (e) {}
+                        throw new Error('HTTP ' + response.status + (detail ? ': ' + String(detail).slice(0, 160) : ''));
+                    }
+                    return await response.json();
+                } finally {
+                    clearTimeout(timeoutId);
+                }
+            };
+            let data;
+            try { data = await once(90000); }
+            catch (err) {
+                const blob = String((err && err.name) || '') + ' ' + String((err && err.message) || '');
+                const cold = (err && err.name === 'AbortError') || /HTTP 502|HTTP 503|Failed to fetch|NetworkError|Load failed/i.test(blob);
+                if (!cold) throw err;
+                data = await once(120000);
+            }
+            updateBadge('api', 'ok');
+            return data;
+        } catch (err) {
+            updateBadge('api', 'error');
+            const msg = err && err.name === 'AbortError'
+                ? 'demorou demais. O servidor pode ter estado dormindo. Toque de novo.'
+                : (err.message || '');
+            throw new Error('Falha no servidor I.A. ' + msg);
+        }
     }
 
     document.getElementById('tab-login').addEventListener('click', () => {
@@ -6882,6 +6911,7 @@
             currentUser = user;
             lastAuthUid = user.uid;
             document.getElementById('dash-user-email').innerText = user.email; updateBadge('firebase', 'ok');
+            fetch('https://coach-backend-97uw.onrender.com/').catch(() => {});
             await loadUserData();
         } else {
             currentUser = null; userData = {}; currentPlan = null;
