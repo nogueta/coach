@@ -669,7 +669,7 @@
                 </div>
                 <p class="text-slate-400 leading-relaxed font-medium">
                     • Perfil: dias por semana e minutos por sessão. A I.A. refaz a fila que ainda não foi feita.<br>
-                    • 2 dias = sessão mais cheia. 5–6 dias = um foco por dia. 20 min corta acessório; 60 min cabe mais, sem estourar o teto.<br>
+                    • 2 dias = sessão mais cheia. 5–6 dias = um foco por dia. 10 min = duas séries. 45 min cabe mais, sem estourar o teto.<br>
                     • Histórico, cargas e eixo ficam. Treino em andamento não é interrompido.<br>
                     • Dados pessoais, métricas e área de perigo abrem e fecham. Fechado = só o título.
                 </p>
@@ -1007,13 +1007,9 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[10px] text-slate-400 block font-bold uppercase mb-1">Tempo por Treino</label>
-                    <select id="ob-mins" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2 py-2.5 text-xs text-white font-bold">
-                        <option value="20">20 min</option>
-                        <option value="30">30 min</option>
-                        <option value="45" selected>45 min</option>
-                        <option value="60">60 min</option>
-                    </select>
+                    <label class="text-[10px] text-slate-400 block font-bold uppercase mb-1">Minutos por sessão</label>
+                    <input id="ob-mins" type="number" min="8" max="120" inputmode="numeric" value="45" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2 py-2.5 text-xs text-white font-bold outline-none">
+                    <span class="text-[9px] text-slate-500 block mt-1">De 8 a 120. 10 min vira 2 séries.</span>
                 </div>
             </div>
         </div>
@@ -1339,9 +1335,7 @@
             </div>
             <div>
                 <label class="text-[9px] text-slate-500 font-bold uppercase block mb-1">Minutos</label>
-                <select id="sched-mins" class="w-full bg-dark-950 border border-slate-700 rounded-xl px-2 py-2.5 text-xs text-white font-bold">
-                    <option value="20">20</option><option value="30">30</option><option value="45">45</option><option value="60">60</option><option value="75">75</option>
-                </select>
+                <input id="sched-mins" type="number" min="8" max="120" inputmode="numeric" value="45" class="w-full bg-dark-950 border border-slate-700 rounded-xl px-2 py-2.5 text-xs text-white font-bold outline-none">
             </div>
         </div>
         <button type="button" onclick="window.startAutoPlan()" class="w-full bg-brand-500 hover:bg-brand-400 text-white font-black py-3.5 rounded-2xl text-xs uppercase">Gerar com a IA</button>
@@ -1574,7 +1568,7 @@
                 <ul class="text-[11px] text-slate-300 space-y-1.5 font-medium leading-relaxed list-disc pl-4">
                     <li><strong class="text-white">Principal:</strong> um por padrão. É ele que sobe de dificuldade. Ninguém pula etapa.</li>
                     <li><strong class="text-white">Complementares:</strong> no mesmo músculo, com outro ângulo. Crucifixo não vira supino. Leg press não vira agachamento.</li>
-                    <li><strong class="text-white">Tempo:</strong> 20 minutos fica no principal. 45 minutos cabe uns três. Uma hora cabe quatro, mais um de braço se o dia for de peito, costas ou ombro.</li>
+                    <li><strong class="text-white">Tempo:</strong> você digita os minutos. 10 a 15 minutos ficam em dois exercícios, duas séries. 45 minutos cabe uns três. Uma hora cabe quatro, mais um de braço se o dia for de peito, costas ou ombro.</li>
                     <li><strong class="text-white">Teto:</strong> se a semana daquele músculo já encheu, o complementar sai. Mais exercício não significa treino infinito.</li>
                     <li><strong class="text-white">Dor:</strong> ombro, cotovelo, joelho ou lombar. Antes do treino seguinte o app pergunta se passou. A teia de volume usa a mesma conta das barras.</li>
                 </ul>
@@ -1931,7 +1925,7 @@
                     </div>
                     <div class="space-y-2 pt-1 border-t border-slate-800">
                         <p class="text-[10px] text-slate-400 font-bold uppercase">Mudar disponibilidade</p>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">2 dias = treino mais cheio. 5 dias = um foco por dia. 20 min corta acessório; 60 min cabe mais. O histórico não some.</p>
+                        <p class="text-[11px] text-slate-400 leading-relaxed">2 dias = treino mais cheio. 5 dias = um foco por dia. Digite os minutos: 10 cabe duas séries. 45 cabe mais. O histórico não some.</p>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label class="text-[9px] text-slate-500 font-bold uppercase block mb-1">Dias / semana</label>
@@ -1945,13 +1939,7 @@
                             </div>
                             <div>
                                 <label class="text-[9px] text-slate-500 font-bold uppercase block mb-1">Minutos / sessão</label>
-                                <select id="prof-mins" class="w-full bg-dark-900 border border-slate-700 rounded-xl px-2 py-2.5 text-xs text-white font-bold">
-                                    <option value="20">20 min</option>
-                                    <option value="30">30 min</option>
-                                    <option value="45">45 min</option>
-                                    <option value="60">60 min</option>
-                                    <option value="75">75 min</option>
-                                </select>
+                                <input id="prof-mins" type="number" min="8" max="120" inputmode="numeric" value="45" class="w-full bg-dark-900 border border-slate-700 rounded-xl px-2 py-2.5 text-xs text-white font-bold outline-none">
                             </div>
                         </div>
                         <button type="button" onclick="window.askRebuildSchedule()" class="w-full bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 text-[11px] font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
@@ -2161,7 +2149,7 @@
             </details>
             <details class="faq-item bg-dark-900 border border-slate-800 rounded-2xl p-4">
                 <summary class="text-xs font-black text-white pr-6">Mudei os dias da semana ou o tempo. O plano muda?</summary>
-                <p class="text-[11px] text-slate-300 mt-2 leading-relaxed">Sim, no <strong class="text-white">Perfil → Métricas</strong>: escolha dias e minutos e toque em <strong class="text-white">Recalcular o ciclo</strong>. A I.A. refaz só os treinos que você ainda não fez. 2 dias = sessão mais cheia (vários grupos). 5–6 dias = um foco por dia. 20 min corta acessório; 60–75 min cabe mais, sem estourar o teto. Histórico, cargas e eixo ficam. “Hoje só tenho 25 min” continua na tela de iniciar a sessão — isso não redesenha a semana.</p>
+                <p class="text-[11px] text-slate-300 mt-2 leading-relaxed">Sim, no <strong class="text-white">Perfil → Métricas</strong>: escolha os dias, <strong class="text-white">digite os minutos</strong> (pode ser 10) e toque em <strong class="text-white">Recalcular o ciclo</strong>. A I.A. refaz só os treinos que você ainda não fez. 10–15 min = duas séries, sem encher de exercício. 2 dias = sessão mais cheia. 5–6 dias = um foco por dia. Histórico, cargas e eixo ficam. “Hoje só tenho 10 min” também cabe na tela de iniciar a sessão — isso muda só o dia, não a semana.</p>
             </details>
             <details class="faq-item bg-dark-900 border border-slate-800 rounded-2xl p-4">
                 <summary class="text-xs font-black text-white pr-6">Fechei o navegador no meio do treino. Perdi tudo?</summary>
@@ -2470,7 +2458,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <label class="text-[10px] font-bold text-slate-400 uppercase whitespace-nowrap">Alterar (min):</label>
-                    <input type="number" id="read-custom-time" min="5" max="180" placeholder="Ex: 45" class="w-20 bg-dark-900 border border-slate-700 rounded-xl p-2 text-center text-xs font-bold text-white outline-none focus:border-brand-500">
+                    <input type="number" id="read-custom-time" min="8" max="120" placeholder="Ex: 10" class="w-20 bg-dark-900 border border-slate-700 rounded-xl p-2 text-center text-xs font-bold text-white outline-none focus:border-brand-500">
                 </div>
             </div>
 
@@ -2644,13 +2632,8 @@
 
                         <div id="recal-panel" class="hidden p-3 bg-dark-950 border border-purple-500/40 rounded-2xl space-y-3">
                             <div>
-                                <label class="text-[9px] text-slate-400 font-bold uppercase block mb-1">Tempo Estimado</label>
-                                <select id="recal-mins" class="w-full bg-dark-900 border border-slate-700 rounded-xl p-2 text-xs text-white font-bold">
-                                    <option value="20">20 min</option>
-                                    <option value="30">30 min</option>
-                                    <option value="45" selected>45 min</option>
-                                    <option value="60">60 min</option>
-                                </select>
+                                <label class="text-[9px] text-slate-400 font-bold uppercase block mb-1">Tempo estimado (minutos)</label>
+                                <input id="recal-mins" type="number" min="8" max="120" inputmode="numeric" value="45" class="w-full bg-dark-900 border border-slate-700 rounded-xl p-2 text-xs text-white font-bold outline-none">
                             </div>
                             <div>
                                 <label class="text-[9px] text-slate-400 font-bold uppercase block mb-1">Estratégia dos Exercícios</label>
@@ -3066,7 +3049,8 @@
         const joints = (ss && ss.joint_stress_index) || {};
         const weekly = (ss && ss.weekly_effective_sets) || {};
         const mins = parseInt(workout.estimatedMinutes || (userData && userData.mins) || 45, 10);
-        const maxWorks = Math.max(3, Math.round(mins / 8));
+        const maxWorks = mins <= 20 ? 3 : Math.max(3, Math.round(mins / 8));
+        if (mins <= 15) return;
         const used = new Set((workout.queue || []).map(q => q && q.catalogId).filter(Boolean));
         const workCount = () => (workout.queue || []).filter(q => q && q.type === 'work' && exerciseKind(q) !== 'prep').length;
         const groups = {};
@@ -3488,7 +3472,8 @@
     16. CATÁLOGO: 1 principal por padrão e complementares com id próprio (supino ≠ crucifixo ≠ inclinado; pronada ≠ supinada; leg press ≠ agachamento). Sem planche/lever/muscle-up/HSPU livre. O código corta se passar do MRV.
     17. AULA HIIT (peso do corpo): sessão PRÓPRIA, 15–20 min, só ids family=hiit. 1×/semana (2× só se hiit_budget>=2 e mesocycle_week===3). hiit_budget===0 (semana 0, deload, ACWR alto, eixo Corrida, queda de FC): ZERO HIIT. Não misturar burpee no meio de barra/flexão. Burpee completo só se joelho e ombro ok — senão burpee sem salto / polichinelo.
     18. TRAVA DE MUSCULAÇÃO: o mesmo foco no máximo 2× na semana e nunca em dias seguidos. A segunda vez leva metade das séries. Corpo inteiro no máximo 2×. Semana sem descanso: RIR mínimo 3, sem HIIT e sem Z4.
-    19. BRAÇO: dia de peito termina com UM tríceps. Dia de costas termina com UM bíceps. Não misture os dois no mesmo dia. Dia de ombro não ganha tríceps extra. Supino e flexão contam só como peito, sem porcentagem para o tríceps. Dip no banco é tríceps. Dip nas paralelas é peito.`;
+    19. BRAÇO: dia de peito termina com UM tríceps. Dia de costas termina com UM bíceps. Não misture os dois no mesmo dia. Dia de ombro não ganha tríceps extra. Supino e flexão contam só como peito, sem porcentagem para o tríceps. Dip no banco é tríceps. Dip nas paralelas é peito.
+    20. SESSÃO CURTA: 8 a 15 minutos é válido. No máximo 2 exercícios de força e 2 séries cada, descanso 20-30s. Sem acessório extra. O que sobrar de tempo é bloco leve, não mais série. Não recuse 10 minutos.`;
 
     let currentUser = null;
     let lastAuthUid = null;
@@ -4404,6 +4389,40 @@
         });
     }
 
+    function readSessionMinutes(raw, fallback) {
+        const n = parseInt(raw, 10);
+        if (n >= 8 && n <= 120) return n;
+        const f = parseInt(fallback, 10);
+        if (f >= 8 && f <= 120) return f;
+        return 45;
+    }
+
+    function trimQueueToBudget(workout) {
+        if (!workout || !Array.isArray(workout.queue)) return;
+        if ((workout.modality || '') === 'Corrida' || isHiitWorkout(workout)) return;
+        const target = readSessionMinutes(workout.estimatedMinutes, 45) * 60;
+        const dropAt = (index) => {
+            const remove = [index];
+            if (workout.queue[index + 1] && workout.queue[index + 1].type === 'rest') remove.push(index + 1);
+            workout.queue = workout.queue.filter((_, i) => remove.indexOf(i) < 0);
+        };
+        if (realisticQueueSeconds(workout) > target + 40) {
+            for (let i = workout.queue.length - 1; i >= 0; i--) {
+                if (workout.queue[i] && workout.queue[i].role === 'filler' && workout.queue[i].type !== 'rest') dropAt(i);
+            }
+        }
+        let guard = 0;
+        while (realisticQueueSeconds(workout) > target + 45 && guard < 10) {
+            guard++;
+            const works = [];
+            workout.queue.forEach((q, i) => {
+                if (q && q.type === 'work' && q.role !== 'filler' && exerciseKind(q) !== 'prep') works.push(i);
+            });
+            if (works.length <= 2) break;
+            dropAt(works[works.length - 1]);
+        }
+    }
+
     function padCalisthenicsMinutes(workout) {
         if (!workout || (workout.modality || '') !== 'Calistenia' || isHiitWorkout(workout)) return workout;
         if (!Array.isArray(workout.queue)) workout.queue = [];
@@ -4673,9 +4692,11 @@
         const z2pace = ss.z2_pace_suggestion || null;
         workout.queue = Array.isArray(workout.queue) ? workout.queue.map(q => ({ ...q })) : [];
         workout.modality = workout.modality || userData.masterAxis || 'Calistenia';
+        const budgetMins = readSessionMinutes(opts.targetMinutes || workout.estimatedMinutes || (userData && userData.mins), 45);
+        workout.estimatedMinutes = budgetMins;
         const soften = !!(workout.softenWeek || (customActive() && userData.weekSoften));
         if (soften && workout.modality === 'Corrida') workout.easyOnly = true;
-        if ((soften || workout.noHiit) && workout.modality === 'Calistenia' && isHiitWorkout(workout)) {
+        if ((soften || workout.noHiit || budgetMins <= 12) && workout.modality === 'Calistenia' && isHiitWorkout(workout)) {
             try { convertHiitToStrength(workout, ss); } catch (e) {}
         }
         try { applyCatalogLayer(workout, ss); } catch (e) {}
@@ -4721,6 +4742,7 @@
             const kind = exerciseKind(item);
             if (kind === 'prep') return { ...item, rirTarget: 4, reps: 0 };
             let sets = Math.max(kind === 'iso' ? 1 : 2, Math.round((parseInt(item.sets, 10) || 3) * (meso.setsMul || 1)));
+            if (budgetMins <= 15 && kind !== 'prep') sets = kind === 'iso' ? 1 : Math.min(sets, 2);
             let rir = Math.max(1, Math.min(4, (parseInt(item.rirTarget, 10) || 2) + (meso.rirDelta || 0)));
             if (workout.halfVolume && workout.modality === 'Musculação') {
                 sets = Math.max(kind === 'iso' ? 1 : 2, Math.round(sets * 0.5));
@@ -4734,6 +4756,7 @@
             const last = lastLifts[item.catalogId] || lastLifts[item.family] || lastLifts[normExName(item.name)];
             const prog = progressFromLast(last, isCal);
             const next = { ...item, sets, rirTarget: rir };
+            if (budgetMins <= 15 && kind !== 'prep') next.restSeconds = Math.min(parseInt(item.restSeconds, 10) || 30, 30);
             if (prog) {
                 if (prog.loadKg) next.loadKg = prog.loadKg;
                 if (prog.addedLoadKg) next.addedLoadKg = prog.addedLoadKg;
@@ -4808,8 +4831,9 @@
 
         const mins = workout.sessionKind === 'hiit'
             ? (workout.estimatedMinutes || 18)
-            : (opts.targetMinutes || workout.estimatedMinutes || userData.mins || 45);
+            : budgetMins;
         workout.estimatedMinutes = parseInt(mins, 10) || (workout.sessionKind === 'hiit' ? 18 : 45);
+        if (workout.sessionKind !== 'hiit') trimQueueToBudget(workout);
         workout.queue = sanitizeAndBalanceQueue(workout.queue, workout.estimatedMinutes, workout.modality);
         if ((workout.modality || '') === 'Calistenia' && !isHiitWorkout(workout)) {
             splitBilateralIsometrics(workout);
@@ -7022,7 +7046,7 @@
         userData.targetWeight = document.getElementById('ob-target-weight').value;
         userData.targetBf = document.getElementById('ob-target-bf').value;
         userData.days = document.getElementById('ob-days').value;
-        userData.mins = document.getElementById('ob-mins').value;
+        userData.mins = String(readSessionMinutes(document.getElementById('ob-mins').value, 45));
         userData.sex = document.getElementById('ob-sex')?.value || 'M';
         userData.currentRestHeartRate = userData.restHeartRate;
 
@@ -7224,7 +7248,7 @@
         const days = document.getElementById('sched-days');
         const mins = document.getElementById('sched-mins');
         if (days) userData.days = days.value;
-        if (mins) userData.mins = mins.value;
+        if (mins) userData.mins = String(readSessionMinutes(mins.value, userData.mins));
         finishAssessmentAndGeneratePlan();
     };
 
@@ -7232,7 +7256,8 @@
         const read = readWeekEditor(document.getElementById('onboard-week'));
         const check = validateWeek(read.slots, read.split);
         if (!check.ok) return window.showAlert('Semana', check.error);
-        const mins = parseInt(document.getElementById('sched-mins')?.value || userData.mins, 10) || 45;
+        const mins = readSessionMinutes(document.getElementById('sched-mins')?.value || userData.mins, 45);
+        userData.mins = String(mins);
         const lettersOk = read.slots.some(d => d.indexOf('Musculação') >= 0) ? validateGymLetters(read.letters, check.split, mins) : { ok: true, warnings: [] };
         if (!lettersOk.ok) return window.showAlert('Grupos', lettersOk.error);
         userData.scheduleMode = 'custom';
@@ -7560,7 +7585,7 @@
             const read = readWeekEditor(document.getElementById('prof-week'));
             const check = validateWeek(read.slots, read.split);
             if (!check.ok) return window.showAlert('Semana', check.error);
-            const mins = parseInt(document.getElementById('prof-mins')?.value || userData.mins, 10) || 45;
+            const mins = readSessionMinutes(document.getElementById('prof-mins')?.value || userData.mins, 45);
             const lettersOk = read.slots.some(d => d.indexOf('Musculação') >= 0) ? validateGymLetters(read.letters, check.split, mins) : { ok: true, warnings: [] };
             if (!lettersOk.ok) return window.showAlert('Grupos', lettersOk.error);
             window._pendingAgenda = { mode: 'custom', slots: read.slots, split: check.split, start: GYM_STARTS[read.start] ? read.start : 'peitoral', letters: read.letters, sessions: check.sessions, warnings: check.warnings.concat(lettersOk.warnings || []) };
@@ -7649,7 +7674,8 @@
         const minsEl = document.getElementById('prof-mins');
         if (!daysEl || !minsEl) return;
         const days = daysEl.value;
-        const mins = minsEl.value;
+        const mins = String(readSessionMinutes(minsEl.value, userData.mins));
+        minsEl.value = mins;
         if (String(userData.days || '') === String(days) && String(userData.mins || '') === String(mins)) {
             return window.showAlert('Agenda', 'Esses já são os seus dias e minutos. Nada a recalcular.');
         }
@@ -7830,7 +7856,7 @@ ${coachingPromptTail()}`;
     // Captura rigorosa do tempo customizado ou padrão
     const customTimeVal = document.getElementById('read-custom-time')?.value;
     const defaultMins = nwIndex !== -1 ? (currentPlan.workouts[nwIndex].estimatedMinutes || userData.mins || 45) : (userData.mins || 45);
-    const finalMins = (customTimeVal && parseInt(customTimeVal, 10) > 0) ? parseInt(customTimeVal, 10) : defaultMins;
+    const finalMins = customTimeVal ? readSessionMinutes(customTimeVal, defaultMins) : readSessionMinutes(defaultMins, 45);
 
     const readinessPayload = {
         energy: selectedEnergy,
@@ -9122,7 +9148,7 @@ TAREFAS: 1.'coachFeedback'. 2.'suggestedDays'. 3.'suggestedMinutes'. 4.'workout'
     };
 
     window.recalibrateProposedWorkout = async () => {
-        const timeMins = document.getElementById('recal-mins').value;
+        const timeMins = readSessionMinutes(document.getElementById('recal-mins').value, userData.mins);
         const strategy = document.getElementById('recal-exercise-strategy').value;
         const syntheticState = await buildSyntheticStateVector();
         const lastMod = currentPlan.workouts.find(w => !w.isCompleted)?.modality;
